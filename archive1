@@ -1,0 +1,12 @@
+echo -n "Enter the github repository name:"
+read repositoryName
+echo -n "Enter the branch you would like archived: "
+read branchName
+cd $repositoryName
+git checkout $branchName
+git tag archive/$branchName $branchName
+git push --tags
+git checkout master
+git push origin --delete $branchName
+echo "Archived branch, deleted branch remotely, and switched back to master."
+cd ..
